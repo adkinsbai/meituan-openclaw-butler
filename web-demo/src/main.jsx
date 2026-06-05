@@ -1,22 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  Bell,
-  Bot,
-  ChevronRight,
-  Coffee,
-  Compass,
-  Film,
-  Handshake,
-  Heart,
-  Home,
-  MapPin,
-  MessageCircle,
-  ShieldCheck,
-  Sparkles,
-  Ticket,
-  Users
-} from "lucide-react";
+import { Bell, Bot, ChevronRight, Coffee, Compass, Film, Handshake, Heart, Home, MapPin, MessageCircle, ShieldCheck, Sparkles, Users } from "lucide-react";
 import "./styles.css";
 
 const discoveries = [
@@ -64,6 +48,10 @@ function App() {
   return (
     <main className="page">
       <section className="phone">
+        <div className="dynamic-island">
+          <span />
+        </div>
+
         <div className="status-bar">
           <span>16:40</span>
           <span>5G · 100%</span>
@@ -71,7 +59,7 @@ function App() {
 
         <header className="app-header">
           <div>
-            <span className="app-kicker">OpenClaw 本地生活管家</span>
+            <span className="app-kicker">美团 · OpenClaw</span>
             <h1>饭点之外</h1>
           </div>
           <button className="icon-btn" aria-label="通知">
@@ -82,7 +70,7 @@ function App() {
         <section className="context-card">
           <div className="context-top">
             <div>
-              <span className="muted">当前场景</span>
+              <span className="muted">Agent 正在判断</span>
               <strong>{tab === "discover" ? "朝阳大悦城" : "望京商圈"}</strong>
             </div>
             <span className="agent-pill">
@@ -93,7 +81,7 @@ function App() {
           <div className="chips">
             <span>下雨</span>
             <span>{tab === "discover" ? "还没到饭点" : "周五晚"}</span>
-            <span>{tab === "discover" ? "不知道干嘛" : "适合室内局"}</span>
+            <span>{tab === "discover" ? "适合室内休息" : "适合轻社交"}</span>
           </div>
         </section>
 
@@ -130,6 +118,8 @@ function App() {
             Agent
           </span>
         </nav>
+
+        <div className="home-indicator" />
       </section>
     </main>
   );
@@ -142,11 +132,11 @@ function DiscoverScreen({ explore, setExplore }) {
         <div className="hero-copy">
           <span>你说</span>
           <h2>我不知道接下来干嘛。</h2>
-          <p>Agent 判断你需要的不是功能入口，而是附近现在可做的生活安排。</p>
+          <p>我先按时间、位置和天气，给你一个最适合现在的安排。</p>
         </div>
       </section>
 
-      <section className="section-block">
+      <section className="section-block compact">
         <div className="section-head">
           <h3>探索度</h3>
           <span>{explore}</span>
@@ -160,8 +150,12 @@ function DiscoverScreen({ explore, setExplore }) {
         </div>
       </section>
 
-      <section className="card-list">
-        {discoveries.map((item) => (
+      <section className="recommend-main">
+        <DiscoveryCard item={discoveries[0]} primary />
+      </section>
+
+      <section className="mini-list">
+        {discoveries.slice(1).map((item) => (
           <DiscoveryCard item={item} key={item.id} />
         ))}
       </section>
@@ -177,10 +171,10 @@ function DiscoverScreen({ explore, setExplore }) {
   );
 }
 
-function DiscoveryCard({ item }) {
+function DiscoveryCard({ item, primary = false }) {
   const Icon = item.icon;
   return (
-    <article className="life-card">
+    <article className={`life-card ${primary ? "primary-card" : ""}`}>
       <div className={`life-icon ${item.tone}`}>
         <Icon size={20} />
       </div>
@@ -192,8 +186,8 @@ function DiscoveryCard({ item }) {
         <h3>{item.title}</h3>
         <p>{item.desc}</p>
         <div className="life-actions">
-          <button>没兴趣</button>
-          <button>收藏</button>
+          {primary && <button>没兴趣</button>}
+          {primary && <button>收藏</button>}
           <button className="dark">
             查看 <ChevronRight size={14} />
           </button>
@@ -208,13 +202,12 @@ function GroupScreen({ reserved, setReserved }) {
     <>
       <section className="broker-card">
         <div className="section-head">
-          <h3>平台大 Agent 已发现机会</h3>
+          <h3>平台大 Agent 发现</h3>
           <span>0.86 匹配</span>
         </div>
-        <p>望京下雨，3 家室内商户今晚有空位，12 个小 Agent 表示主人近期对桌游、密室、轻社交感兴趣。</p>
+        <p>望京今晚下雨，桌游店有空位；多个小 Agent 对桌游、密室、轻社交表达了匿名兴趣。</p>
         <div className="broker-stats">
-          <span>3 家商户</span>
-          <span>12 个 Agent</span>
+          <span>3 家可选</span>
           <span>4 人可成局</span>
         </div>
       </section>
@@ -222,7 +215,7 @@ function GroupScreen({ reserved, setReserved }) {
       <section className="group-proposal">
         <div className="proposal-cover">
           <Handshake size={24} />
-          <span>推荐成局</span>
+          <span>接近成局</span>
         </div>
         <h2>4 人轻策略桌游局</h2>
         <div className="proposal-facts">
@@ -243,9 +236,9 @@ function GroupScreen({ reserved, setReserved }) {
         </button>
       </section>
 
-      <section className="section-block">
+      <section className="section-block compact">
         <div className="section-head">
-          <h3>小 Agent 意向</h3>
+          <h3>参与意向</h3>
           <span>{reserved ? "已确认 3 人" : "待确认"}</span>
         </div>
         <div className="agent-list">
@@ -287,7 +280,7 @@ function ToolStrip({ items }) {
   return (
     <section className="tool-strip">
       <div className="section-head">
-        <h3>Tool Log</h3>
+        <h3>OpenClaw 调用</h3>
         <span>OpenClaw</span>
       </div>
       {items.map(([tool, result]) => (
