@@ -1,18 +1,17 @@
 import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  BadgeCheck,
+  Bell,
   Bot,
-  CalendarClock,
   ChevronRight,
-  CircleDollarSign,
   Coffee,
   Compass,
-  EyeOff,
   Film,
   Handshake,
+  Heart,
+  Home,
   MapPin,
-  MessageSquare,
+  MessageCircle,
   ShieldCheck,
   Sparkles,
   Ticket,
@@ -20,209 +19,183 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
-const discoveryRecommendations = [
+const discoveries = [
   {
-    id: "act_001",
-    mode: "稳妥",
-    title: "喜茶热饮 6 分钟可取",
+    id: "safe",
+    label: "稳妥",
+    title: "热饮休息",
+    desc: "喜茶热饮 6 分钟可取，适合先坐下缓一缓。",
+    meta: "B1 层 · 38 元",
     icon: Coffee,
-    price: "38 元",
-    meta: "B1 层 · 20 分钟",
-    reason: "你最近常点热饮，当前在商场逛累了，适合先坐下休息。",
-    tone: "safe"
+    tone: "green"
   },
   {
-    id: "act_002",
-    mode: "轻破圈",
-    title: "17:20 轻松动画电影",
+    id: "light",
+    label: "轻破圈",
+    title: "17:20 动画电影",
+    desc: "风格轻松但题材更新鲜，散场后刚好接晚饭。",
+    meta: "6 楼 · 96 元/2人",
     icon: Film,
-    price: "96 元/2人",
-    meta: "6 楼影院 · 110 分钟",
-    reason: "你常看喜剧，这部节奏轻松但题材更新鲜，散场后刚好接晚饭。",
-    tone: "explore"
+    tone: "blue"
   },
   {
-    id: "act_003",
-    mode: "大胆尝试",
-    title: "手作香薰体验课",
+    id: "bold",
+    label: "大胆尝试",
+    title: "手作香薰体验",
+    desc: "45 分钟低风险新体验，在商场内不用淋雨。",
+    meta: "5 楼 · 79 元",
     icon: Sparkles,
-    price: "79 元",
-    meta: "5 楼 · 45 分钟",
-    reason: "你很少参加体验类活动，但它在商场内、时间短、低风险。",
-    tone: "bold"
+    tone: "orange"
   }
 ];
 
-const toolLogDiscovery = [
-  {
-    tool: "life scene.detect",
-    result: "mall_discovery · in_mall / rain / not_meal_time"
-  },
-  {
-    tool: "life activity.discover",
-    result: "3 recommendations · safe / light_explore / bold_explore"
-  },
-  {
-    tool: "life preference.update",
-    result: "feedback-ready · exploration can be adjusted"
-  }
-];
-
-const toolLogBroker = [
-  {
-    tool: "life broker.scan",
-    result: "望京 · 3 indoor venues · rain"
-  },
-  {
-    tool: "life broker.poll-agents",
-    result: "12 agents polled · anonymous summaries only"
-  },
-  {
-    tool: "life broker.propose-groups",
-    result: "轻策略桌游局 · match_score 0.86"
-  },
-  {
-    tool: "life a2a.negotiate",
-    result: "3 agents expressed interest · owner confirmation required"
-  }
-];
-
-const matchedAgents = [
-  { name: "你的个人小 Agent", state: "适合主人", tags: "桌游 / 密室 / 50-100" },
-  { name: "北纬桌游玩家", state: "匿名意向", tags: "桌游 / 轻策略" },
-  { name: "周五不想回家", state: "匿名意向", tags: "桌游 / 密室" },
-  { name: "朋友张三", state: "熟人优先", tags: "上次一起密室" }
+const agents = [
+  { name: "你的 Agent", tags: "桌游 / 50-100", state: "适合主人" },
+  { name: "北纬桌游玩家", tags: "轻策略 / 同商圈", state: "匿名意向" },
+  { name: "周五不想回家", tags: "密室 / 桌游", state: "匿名意向" }
 ];
 
 function App() {
-  const [view, setView] = useState("discover");
+  const [tab, setTab] = useState("discover");
   const [explore, setExplore] = useState("新鲜一点");
   const [reserved, setReserved] = useState(false);
-  const activeToolLog = view === "discover" ? toolLogDiscovery : toolLogBroker;
-
-  const stageLabel = useMemo(() => {
-    if (view === "discover") return "个人发现";
-    if (reserved) return "已成局";
-    return "主动撮合";
-  }, [view, reserved]);
+  const mode = useMemo(() => (tab === "discover" ? "个人发现" : reserved ? "已成局" : "主动撮合"), [tab, reserved]);
 
   return (
-    <main className="app-shell">
-      <header className="topbar">
-        <div>
-          <div className="eyebrow">OpenClaw × 美团黑客松</div>
-          <h1>饭点之外</h1>
-          <p>本地生活全天候私人管家：从用户搜索服务，到 Agent 主动发现和撮合本地生活。</p>
+    <main className="page">
+      <section className="phone">
+        <div className="status-bar">
+          <span>16:40</span>
+          <span>5G · 100%</span>
         </div>
-        <div className="status-pill">
-          <Bot size={18} />
-          {stageLabel}
-        </div>
-      </header>
 
-      <nav className="segmented">
-        <button className={view === "discover" ? "active" : ""} onClick={() => setView("discover")}>
-          <Compass size={18} />
-          个人发现
-        </button>
-        <button className={view === "broker" ? "active" : ""} onClick={() => setView("broker")}>
-          <Handshake size={18} />
-          主动组局
-        </button>
-      </nav>
+        <header className="app-header">
+          <div>
+            <span className="app-kicker">OpenClaw 本地生活管家</span>
+            <h1>饭点之外</h1>
+          </div>
+          <button className="icon-btn" aria-label="通知">
+            <Bell size={19} />
+          </button>
+        </header>
 
-      {view === "discover" ? (
-        <DiscoveryView explore={explore} setExplore={setExplore} />
-      ) : (
-        <BrokerView reserved={reserved} setReserved={setReserved} />
-      )}
-
-      <section className="tool-panel">
-        <div className="panel-title">
-          <MessageSquare size={18} />
-          Tool Log
-        </div>
-        <div className="tool-grid">
-          {activeToolLog.map((item) => (
-            <div className="tool-item" key={item.tool}>
-              <code>{item.tool}</code>
-              <span>{item.result}</span>
+        <section className="context-card">
+          <div className="context-top">
+            <div>
+              <span className="muted">当前场景</span>
+              <strong>{tab === "discover" ? "朝阳大悦城" : "望京商圈"}</strong>
             </div>
-          ))}
+            <span className="agent-pill">
+              <Bot size={14} />
+              {mode}
+            </span>
+          </div>
+          <div className="chips">
+            <span>下雨</span>
+            <span>{tab === "discover" ? "还没到饭点" : "周五晚"}</span>
+            <span>{tab === "discover" ? "不知道干嘛" : "适合室内局"}</span>
+          </div>
+        </section>
+
+        <div className="tab-row">
+          <button className={tab === "discover" ? "active" : ""} onClick={() => setTab("discover")}>
+            <Compass size={17} />
+            发现
+          </button>
+          <button className={tab === "group" ? "active" : ""} onClick={() => setTab("group")}>
+            <Users size={17} />
+            组局
+          </button>
         </div>
+
+        <div className="screen-content">
+          {tab === "discover" ? (
+            <DiscoverScreen explore={explore} setExplore={setExplore} />
+          ) : (
+            <GroupScreen reserved={reserved} setReserved={setReserved} />
+          )}
+        </div>
+
+        <nav className="bottom-nav">
+          <span className="active">
+            <Home size={17} />
+            首页
+          </span>
+          <span>
+            <Ticket size={17} />
+            订单
+          </span>
+          <span>
+            <MessageCircle size={17} />
+            Agent
+          </span>
+        </nav>
       </section>
     </main>
   );
 }
 
-function DiscoveryView({ explore, setExplore }) {
+function DiscoverScreen({ explore, setExplore }) {
   return (
-    <section className="main-grid">
-      <aside className="scene-card">
-        <div className="panel-title">
-          <MapPin size={18} />
-          当前场景
+    <>
+      <section className="hero-card">
+        <div className="hero-copy">
+          <span>你说</span>
+          <h2>我不知道接下来干嘛。</h2>
+          <p>Agent 判断你需要的不是功能入口，而是附近现在可做的生活安排。</p>
         </div>
-        <h2>朝阳大悦城</h2>
-        <div className="scene-facts">
-          <span>16:40</span>
-          <span>下雨</span>
-          <span>还没到饭点</span>
-          <span>有点累</span>
+      </section>
+
+      <section className="section-block">
+        <div className="section-head">
+          <h3>探索度</h3>
+          <span>{explore}</span>
         </div>
-        <div className="quote">“我不知道接下来干嘛。”</div>
-        <p>
-          Agent 判断你现在不是在找一个功能入口，而是在寻找一个低压力、能承接下一段时间的本地生活安排。
-        </p>
-        <div className="explore-control">
-          {["稳一点", "新鲜一点", "大胆一点"].map((level) => (
-            <button className={explore === level ? "active" : ""} key={level} onClick={() => setExplore(level)}>
-              {level}
+        <div className="segmented">
+          {["稳一点", "新鲜一点", "大胆一点"].map((item) => (
+            <button key={item} className={explore === item ? "active" : ""} onClick={() => setExplore(item)}>
+              {item}
             </button>
           ))}
         </div>
-      </aside>
+      </section>
 
-      <div className="recommendation-stack">
-        {discoveryRecommendations.map((item) => (
-          <RecommendationCard item={item} key={item.id} />
+      <section className="card-list">
+        {discoveries.map((item) => (
+          <DiscoveryCard item={item} key={item.id} />
         ))}
-      </div>
+      </section>
 
-      <aside className="decision-card">
-        <div className="panel-title">
-          <ShieldCheck size={18} />
-          推荐原则
-        </div>
-        <ul>
-          <li>每次只给 1-3 个高相关选择。</li>
-          <li>大胆尝试必须低风险、低成本、可取消。</li>
-          <li>推荐理由必须来自场景信号。</li>
-          <li>用户反馈会调整个人小 Agent 的探索度。</li>
-        </ul>
-      </aside>
-    </section>
+      <ToolStrip
+        items={[
+          ["scene.detect", "mall_discovery"],
+          ["activity.discover", "3 档推荐"],
+          ["preference.update", "等待反馈"]
+        ]}
+      />
+    </>
   );
 }
 
-function RecommendationCard({ item }) {
+function DiscoveryCard({ item }) {
   const Icon = item.icon;
   return (
-    <article className={`recommendation-card ${item.tone}`}>
-      <div className="card-icon">
-        <Icon size={22} />
+    <article className="life-card">
+      <div className={`life-icon ${item.tone}`}>
+        <Icon size={20} />
       </div>
-      <div className="card-body">
-        <div className="card-meta">
-          <span>{item.mode}</span>
-          <span>{item.price}</span>
+      <div className="life-body">
+        <div className="life-top">
+          <span>{item.label}</span>
+          <small>{item.meta}</small>
         </div>
         <h3>{item.title}</h3>
-        <p>{item.reason}</p>
-        <div className="card-footer">
-          <span>{item.meta}</span>
-          <button>
-            查看 <ChevronRight size={16} />
+        <p>{item.desc}</p>
+        <div className="life-actions">
+          <button>没兴趣</button>
+          <button>收藏</button>
+          <button className="dark">
+            查看 <ChevronRight size={14} />
           </button>
         </div>
       </div>
@@ -230,57 +203,53 @@ function RecommendationCard({ item }) {
   );
 }
 
-function BrokerView({ reserved, setReserved }) {
+function GroupScreen({ reserved, setReserved }) {
   return (
-    <section className="broker-layout">
-      <div className="broker-panel">
-        <div className="panel-title">
-          <Bot size={18} />
-          平台大 Agent
+    <>
+      <section className="broker-card">
+        <div className="section-head">
+          <h3>平台大 Agent 已发现机会</h3>
+          <span>0.86 匹配</span>
         </div>
-        <h2>望京商圈机会扫描</h2>
-        <div className="metric-grid">
-          <Metric icon={CalendarClock} label="时间" value="周五 16:00" />
-          <Metric icon={MapPin} label="商圈" value="望京" />
-          <Metric icon={Ticket} label="可用资源" value="3 家室内商户" />
-          <Metric icon={Users} label="匿名兴趣" value="12 个小 Agent" />
+        <p>望京下雨，3 家室内商户今晚有空位，12 个小 Agent 表示主人近期对桌游、密室、轻社交感兴趣。</p>
+        <div className="broker-stats">
+          <span>3 家商户</span>
+          <span>12 个 Agent</span>
+          <span>4 人可成局</span>
         </div>
-        <p>
-          下雨天气适合室内活动。平台大 Agent 发现桌游店 19:30 有空位，并聚类到多个用户对桌游、密室、轻社交感兴趣。
-        </p>
-      </div>
+      </section>
 
-      <div className="group-card">
-        <div className="panel-title">
-          <Handshake size={18} />
-          推荐成局
+      <section className="group-proposal">
+        <div className="proposal-cover">
+          <Handshake size={24} />
+          <span>推荐成局</span>
         </div>
         <h2>4 人轻策略桌游局</h2>
-        <div className="group-facts">
+        <div className="proposal-facts">
+          <span>
+            <MapPin size={14} />
+            岛上桌游 望京店
+          </span>
           <span>19:30-21:30</span>
-          <span>岛上桌游 望京店</span>
-          <span>人均 68 元</span>
-          <span>AA</span>
+          <span>人均 68 元 · AA</span>
         </div>
-        <p>
-          这个局适合你：你最近收藏过桌游店，地点在 2km 内，预算匹配，已有 3 个 Agent 表达兴趣，活动地点是平台可核验商户。
-        </p>
-        <div className="privacy-row">
-          <EyeOff size={16} />
-          成局前仅展示昵称、兴趣标签和商圈级位置。
+        <p>你最近收藏过桌游店，地点在 2km 内，预算匹配，已有 3 个 Agent 表达匿名兴趣。</p>
+        <div className="safe-note">
+          <ShieldCheck size={16} />
+          成局前只展示昵称、兴趣标签和商圈级位置。
         </div>
-        <button className="primary-action" onClick={() => setReserved(true)}>
+        <button className="primary" onClick={() => setReserved(true)}>
           {reserved ? "已锁定商户" : "给主人确认并锁定"}
         </button>
-      </div>
+      </section>
 
-      <div className="personal-panel">
-        <div className="panel-title">
-          <BadgeCheck size={18} />
-          个人小 Agent
+      <section className="section-block">
+        <div className="section-head">
+          <h3>小 Agent 意向</h3>
+          <span>{reserved ? "已确认 3 人" : "待确认"}</span>
         </div>
         <div className="agent-list">
-          {matchedAgents.map((agent) => (
+          {agents.map((agent) => (
             <div className="agent-row" key={agent.name}>
               <div>
                 <strong>{agent.name}</strong>
@@ -290,24 +259,44 @@ function BrokerView({ reserved, setReserved }) {
             </div>
           ))}
         </div>
-        {reserved && (
-          <div className="reservation-box">
+      </section>
+
+      {reserved && (
+        <section className="success-card">
+          <Heart size={18} />
+          <div>
             <strong>预约成功</strong>
-            <span>桌游套餐已锁定，AA 待确认。结束后可接 21:40 夜宵团购，人均 88 元。</span>
+            <p>桌游套餐已锁定，AA 待确认。结束后可接 21:40 夜宵团购，人均 88 元。</p>
           </div>
-        )}
-      </div>
-    </section>
+        </section>
+      )}
+
+      <ToolStrip
+        items={[
+          ["broker.scan", "商圈资源"],
+          ["broker.poll-agents", "匿名摘要"],
+          ["broker.propose-groups", "候选局"],
+          ["group.reserve", reserved ? "已预约" : "待确认"]
+        ]}
+      />
+    </>
   );
 }
 
-function Metric({ icon: Icon, label, value }) {
+function ToolStrip({ items }) {
   return (
-    <div className="metric">
-      <Icon size={18} />
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
+    <section className="tool-strip">
+      <div className="section-head">
+        <h3>Tool Log</h3>
+        <span>OpenClaw</span>
+      </div>
+      {items.map(([tool, result]) => (
+        <div className="tool-line" key={tool}>
+          <code>life {tool}</code>
+          <span>{result}</span>
+        </div>
+      ))}
+    </section>
   );
 }
 
