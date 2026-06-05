@@ -1,0 +1,35 @@
+[
+  {
+    "activity_id": "act_001",
+    "mode": "safe",
+    "title": "喜茶热饮 6 分钟可取",
+    "service": "tea_pickup",
+    "price": 38,
+    "duration_minutes": 20,
+    "distance": "B1 层",
+    "reason": "你最近常点热饮，且当前在商场逛累了",
+    "tool": "life service.suggest"
+  },
+  {
+    "activity_id": "act_002",
+    "mode": "light_explore",
+    "title": "17:20 轻松动画电影",
+    "service": "movie",
+    "price": 96,
+    "duration_minutes": 110,
+    "distance": "6 楼影院",
+    "reason": "你常看喜剧，这部电影风格轻松但题材更新鲜",
+    "tool": "life service.suggest"
+  },
+  {
+    "activity_id": "act_003",
+    "mode": "bold_explore",
+    "title": "手作香薰体验课",
+    "service": "experience_course",
+    "price": 79,
+    "duration_minutes": 45,
+    "distance": "5 楼",
+    "reason": "你很少参加体验类活动，但它在商场内、时间短、低风险",
+    "tool": "life service.suggest"
+  }
+]

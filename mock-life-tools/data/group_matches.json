@@ -1,0 +1,39 @@
+{
+  "known_friends": [
+    {
+      "user_id": "friend_001",
+      "name": "张三",
+      "reason": "上次一起玩过密室，周五晚上常有空",
+      "availability": "likely_available"
+    },
+    {
+      "user_id": "friend_002",
+      "name": "李四",
+      "reason": "收藏过桌游店，和你有 3 次共同到店记录",
+      "availability": "unknown"
+    }
+  ],
+  "interest_matches": [
+    {
+      "user_id": "match_001",
+      "nickname": "北纬桌游玩家",
+      "tags": ["桌游", "轻策略", "望京"],
+      "distance_area": "同商圈",
+      "credit_status": "normal",
+      "availability": "available"
+    },
+    {
+      "user_id": "match_002",
+      "nickname": "周五不想回家",
+      "tags": ["桌游", "密室", "电影"],
+      "distance_area": "2km 内",
+      "credit_status": "normal",
+      "availability": "available"
+    }
+  ],
+  "safety": {
+    "location_visibility": "business_area_only",
+    "venue_required": true,
+    "private_contact_hidden": true
+  }
+}

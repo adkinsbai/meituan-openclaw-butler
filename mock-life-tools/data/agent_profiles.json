@@ -1,0 +1,38 @@
+[
+  {
+    "agent_id": "agent_user_001",
+    "positive_tags": ["桌游", "密室", "轻社交"],
+    "negative_tags": ["高强度运动", "太吵的 KTV"],
+    "availability": "possibly_available",
+    "time_window": "19:30-22:00",
+    "budget_range": "50-100",
+    "safety_policy": ["verified_venue_only", "hide_identity_until_confirmed"]
+  },
+  {
+    "agent_id": "agent_user_102",
+    "positive_tags": ["桌游", "电影"],
+    "negative_tags": ["夜间偏僻地点"],
+    "availability": "available",
+    "time_window": "19:00-21:30",
+    "budget_range": "50-100",
+    "safety_policy": ["verified_venue_only"]
+  },
+  {
+    "agent_id": "agent_user_203",
+    "positive_tags": ["桌游", "轻策略"],
+    "negative_tags": ["陌生私人住址"],
+    "availability": "available",
+    "time_window": "19:30-22:00",
+    "budget_range": "50-100",
+    "safety_policy": ["verified_venue_only", "business_area_only"]
+  },
+  {
+    "agent_id": "agent_user_316",
+    "positive_tags": ["密室", "桌游", "探店"],
+    "negative_tags": ["高消费 KTV"],
+    "availability": "available",
+    "time_window": "19:30-22:30",
+    "budget_range": "50-100",
+    "safety_policy": ["verified_venue_only"]
+  }
+]

@@ -179,6 +179,31 @@ life group.reserve
 
 [DEV_DOC.md](./DEV_DOC.md)
 
+开发运行说明见：
+
+[DEVELOPMENT.md](./DEVELOPMENT.md)
+
+## 快速开始
+
+验证 Mock Tool Layer：
+
+```bash
+npm run test:mock
+```
+
+安装并启动 Web Demo：
+
+```bash
+npm install --prefix web-demo
+npm run dev
+```
+
+生产构建：
+
+```bash
+npm run build
+```
+
 ## 一句话
 
 > 饭点之外，让美团从“用户搜索服务”升级为“Agent 主动撮合本地生活”。

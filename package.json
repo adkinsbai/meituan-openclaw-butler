@@ -1,0 +1,11 @@
+{
+  "name": "meituan-openclaw-butler",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix web-demo run dev",
+    "build": "npm --prefix web-demo run build",
+    "mock": "node mock-life-tools/bin/life.js",
+    "test:mock": "node mock-life-tools/bin/life.js scene.detect --text \"我不知道接下来干嘛\" && node mock-life-tools/bin/life.js activity.discover --location \"朝阳大悦城\" --time \"16:40\" --weather rain --explore-level medium && node mock-life-tools/bin/life.js broker.propose-groups --request-id broker_req_001"
+  }
+}

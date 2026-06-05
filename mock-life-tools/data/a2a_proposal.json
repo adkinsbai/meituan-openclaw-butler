@@ -1,0 +1,35 @@
+{
+  "proposal_id": "proposal_001",
+  "status": "ready_for_owner_confirmation",
+  "activity": "轻策略桌游",
+  "venue": {
+    "venue_id": "venue_001",
+    "name": "岛上桌游 望京店",
+    "rating": 4.8,
+    "distance": "1.6km"
+  },
+  "time": "19:30-21:30",
+  "group_size": 4,
+  "confirmed_interest_count": 3,
+  "price_per_person": 68,
+  "matched_people_preview": [
+    {
+      "nickname": "北纬桌游玩家",
+      "tags": ["桌游", "轻策略"],
+      "credit_status": "normal"
+    },
+    {
+      "nickname": "周五不想回家",
+      "tags": ["桌游", "密室"],
+      "credit_status": "normal"
+    }
+  ],
+  "why_recommend_to_owner": [
+    "你最近收藏过桌游店",
+    "地点在 2km 内",
+    "已有 3 人表达意向",
+    "预算符合你的历史消费区间",
+    "活动地点是平台可核验商户"
+  ],
+  "requires_owner_confirmation": true
+}

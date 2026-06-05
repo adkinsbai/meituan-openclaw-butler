@@ -1,0 +1,36 @@
+{
+  "name": "fandianzhihou-life-tools",
+  "description": "Mock Tool Layer for the OpenClaw local-life butler hackathon demo.",
+  "tools": [
+    {
+      "name": "scene.detect",
+      "command": "node mock-life-tools/bin/life.js scene.detect --text \"{{text}}\"",
+      "description": "Detect local-life scene signals from user text."
+    },
+    {
+      "name": "activity.discover",
+      "command": "node mock-life-tools/bin/life.js activity.discover --location \"{{location}}\" --time \"{{time}}\" --weather \"{{weather}}\" --explore-level \"{{explore_level}}\"",
+      "description": "Return safe, light-explore, and bold-explore activity recommendations."
+    },
+    {
+      "name": "broker.scan",
+      "command": "node mock-life-tools/bin/life.js broker.scan --business-area \"{{business_area}}\" --time-window \"{{time_window}}\" --weather \"{{weather}}\"",
+      "description": "Platform broker agent scans nearby venues and available resources."
+    },
+    {
+      "name": "broker.poll-agents",
+      "command": "node mock-life-tools/bin/life.js broker.poll-agents --business-area \"{{business_area}}\" --activity-types \"{{activity_types}}\" --time-window \"{{time_window}}\"",
+      "description": "Poll personal agents for anonymous interest summaries."
+    },
+    {
+      "name": "broker.propose-groups",
+      "command": "node mock-life-tools/bin/life.js broker.propose-groups --request-id \"{{request_id}}\"",
+      "description": "Generate group proposals from broker scan and personal-agent summaries."
+    },
+    {
+      "name": "group.reserve",
+      "command": "node mock-life-tools/bin/life.js group.reserve --group-id \"{{group_id}}\" --venue-id \"{{venue_id}}\" --package-id \"{{package_id}}\"",
+      "description": "Reserve a mock merchant package after owner confirmation."
+    }
+  ]
+}

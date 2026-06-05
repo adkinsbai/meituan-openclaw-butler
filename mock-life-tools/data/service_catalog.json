@@ -1,0 +1,22 @@
+[
+  {
+    "service_id": "tea_pickup",
+    "name": "茶饮自提",
+    "solves": ["rest", "low_energy", "mall_hangout"]
+  },
+  {
+    "service_id": "movie",
+    "name": "电影",
+    "solves": ["rainy_day", "waiting_time", "date", "mall_hangout"]
+  },
+  {
+    "service_id": "in_store_deal",
+    "name": "到店团购",
+    "solves": ["friends_meetup", "save_money", "dinner_plan"]
+  },
+  {
+    "service_id": "board_game",
+    "name": "桌游",
+    "solves": ["light_social", "group_activity", "indoor_activity"]
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "resource_id": "venue_001",
+    "type": "board_game",
+    "name": "岛上桌游 望京店",
+    "available_slots": ["19:30-21:30"],
+    "capacity": [4, 6],
+    "price_per_person": 68,
+    "rating": 4.8,
+    "distance": "1.6km"
+  },
+  {
+    "resource_id": "venue_002",
+    "type": "ktv",
+    "name": "星聚会 KTV 望京店",
+    "available_slots": ["20:00-23:00"],
+    "capacity": [4, 8],
+    "price_per_person": 128,
+    "rating": 4.7,
+    "distance": "2.2km"
+  },
+  {
+    "resource_id": "venue_003",
+    "type": "movie",
+    "name": "万达影城 朝阳大悦城店",
+    "available_slots": ["17:20-19:10"],
+    "capacity": [2, 4],
+    "price_per_person": 48,
+    "rating": 4.6,
+    "distance": "6 楼"
+  }
+]

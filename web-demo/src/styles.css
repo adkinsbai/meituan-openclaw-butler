@@ -1,0 +1,460 @@
+:root {
+  font-family: Inter, "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+  color: #202124;
+  background: #f6f5f0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1180px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 28px 0 36px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0 18px;
+}
+
+.eyebrow {
+  color: #d4572b;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.topbar p {
+  margin-top: 10px;
+  max-width: 680px;
+  color: #62615b;
+  line-height: 1.6;
+}
+
+.status-pill,
+.panel-title,
+.segmented button,
+.card-footer button,
+.primary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-pill {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #126a55;
+  background: #e6f5ef;
+  font-weight: 700;
+}
+
+.segmented {
+  display: flex;
+  gap: 8px;
+  padding: 6px;
+  width: fit-content;
+  background: #e9e5da;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.segmented button,
+.explore-control button {
+  border: 0;
+  cursor: pointer;
+  color: #56534d;
+  background: transparent;
+}
+
+.segmented button {
+  min-width: 128px;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+}
+
+.segmented button.active,
+.explore-control button.active {
+  color: #ffffff;
+  background: #202124;
+}
+
+.main-grid,
+.broker-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.main-grid {
+  grid-template-columns: 280px 1fr 280px;
+}
+
+.broker-layout {
+  grid-template-columns: 1fr 1.15fr 1fr;
+}
+
+.scene-card,
+.decision-card,
+.recommendation-card,
+.broker-panel,
+.group-card,
+.personal-panel,
+.tool-panel {
+  border: 1px solid #ded8cb;
+  background: #fffdfa;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(56, 44, 22, 0.07);
+}
+
+.scene-card,
+.decision-card,
+.broker-panel,
+.group-card,
+.personal-panel,
+.tool-panel {
+  padding: 18px;
+}
+
+.panel-title {
+  color: #5f5c55;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.scene-card h2,
+.broker-panel h2,
+.group-card h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+}
+
+.scene-facts,
+.group-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.scene-facts span,
+.group-facts span,
+.card-meta span {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #f0eadf;
+  color: #56534d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.quote {
+  padding: 12px;
+  border-left: 4px solid #f2b544;
+  background: #fff6df;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.scene-card p,
+.decision-card li,
+.broker-panel p,
+.group-card p,
+.privacy-row,
+.reservation-box span {
+  color: #62615b;
+  line-height: 1.55;
+}
+
+.explore-control {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.explore-control button {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f0eadf;
+  font-weight: 800;
+}
+
+.recommendation-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.recommendation-card {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 14px;
+  padding: 16px;
+}
+
+.card-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.recommendation-card.safe .card-icon {
+  background: #169b7c;
+}
+
+.recommendation-card.explore .card-icon {
+  background: #2f65d8;
+}
+
+.recommendation-card.bold .card-icon {
+  background: #d4572b;
+}
+
+.card-meta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.card-body h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.card-body p {
+  color: #62615b;
+  line-height: 1.6;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  color: #7a766d;
+  font-size: 13px;
+}
+
+.card-footer button {
+  border: 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #202124;
+  cursor: pointer;
+}
+
+.decision-card ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.decision-card li + li {
+  margin-top: 10px;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.metric {
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3efe6;
+}
+
+.metric svg {
+  color: #d4572b;
+}
+
+.metric span,
+.metric strong {
+  display: block;
+}
+
+.metric span {
+  color: #77736a;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.metric strong {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.privacy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 16px;
+}
+
+.primary-action {
+  width: 100%;
+  justify-content: center;
+  border: 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #d4572b;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.agent-list {
+  display: grid;
+  gap: 10px;
+}
+
+.agent-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f3efe6;
+}
+
+.agent-row strong,
+.agent-row span {
+  display: block;
+}
+
+.agent-row span {
+  color: #77736a;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.agent-row em {
+  flex: 0 0 auto;
+  color: #126a55;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+.reservation-box {
+  margin-top: 14px;
+  padding: 14px;
+  border: 1px solid #b6dfd1;
+  border-radius: 8px;
+  background: #eaf7f2;
+}
+
+.reservation-box strong,
+.reservation-box span {
+  display: block;
+}
+
+.reservation-box span {
+  margin-top: 6px;
+}
+
+.tool-panel {
+  margin-top: 16px;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.tool-item {
+  padding: 12px;
+  border-radius: 8px;
+  background: #202124;
+  color: #ffffff;
+}
+
+.tool-item code,
+.tool-item span {
+  display: block;
+}
+
+.tool-item code {
+  color: #f7ce63;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.tool-item span {
+  color: #dfddd6;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+@media (max-width: 980px) {
+  .main-grid,
+  .broker-layout,
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100vw - 20px, 1180px);
+    padding-top: 16px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .segmented {
+    width: 100%;
+  }
+
+  .segmented button {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+}

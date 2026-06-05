@@ -1,0 +1,13 @@
+{
+  "user_id": "user_001",
+  "interests": ["桌游", "密室", "电影", "茶饮"],
+  "negative_interests": ["高强度运动", "太吵的 KTV"],
+  "budget_range": "50-100",
+  "explore_level": "medium",
+  "safety_policy": {
+    "known_friends_first": true,
+    "allow_interest_matches": true,
+    "verified_venue_only": true,
+    "hide_identity_until_confirmed": true
+  }
+}

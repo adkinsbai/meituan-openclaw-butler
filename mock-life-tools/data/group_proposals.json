@@ -1,0 +1,37 @@
+[
+  {
+    "proposal_id": "group_prop_001",
+    "activity": "轻策略桌游",
+    "venue_id": "venue_001",
+    "venue_name": "岛上桌游 望京店",
+    "time": "19:30-21:30",
+    "target_size": 4,
+    "candidate_agents": ["agent_user_001", "agent_user_102", "agent_user_203", "agent_user_316"],
+    "price_per_person": 68,
+    "match_score": 0.86,
+    "why": [
+      "4 个 Agent 对桌游或轻社交有正向兴趣",
+      "时间窗口重合",
+      "预算均在 50-100 元",
+      "商户 19:30 有 4 人桌可锁定",
+      "下雨天气适合室内活动"
+    ],
+    "requires_owner_confirmation": true
+  },
+  {
+    "proposal_id": "group_prop_002",
+    "activity": "KTV + 夜宵",
+    "venue_id": "venue_002",
+    "venue_name": "星聚会 KTV 望京店",
+    "time": "20:00-23:00",
+    "target_size": 6,
+    "candidate_agents": ["agent_user_501", "agent_user_502", "agent_user_503"],
+    "price_per_person": 128,
+    "match_score": 0.71,
+    "why": [
+      "人数未达到最低成局阈值",
+      "预算对部分用户偏高"
+    ],
+    "requires_owner_confirmation": true
+  }
+]
