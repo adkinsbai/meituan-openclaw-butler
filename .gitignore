@@ -7,4 +7,7 @@ Thumbs.db
 *.png
 *.jpg
 !web-demo/public/**
+!docs/**/*.png
+!docs/**/*.jpg
+!docs/**/*.mp4
 snap*.mjs
