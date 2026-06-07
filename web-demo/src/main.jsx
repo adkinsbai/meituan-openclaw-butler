@@ -186,6 +186,31 @@ const buildSystemPrompt = (mem) => {
   return prompt;
 };
 
+// 简易markdown渲染（支持加粗、换行、emoji）
+const renderMarkdown = (text) => {
+  if (!text) return null;
+  const lines = text.split('\n');
+  return lines.map((line, li) => {
+    // 处理 **bold**
+    const parts = [];
+    let remaining = line;
+    let key = 0;
+    while (remaining.length > 0) {
+      const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
+      if (boldMatch) {
+        const idx = boldMatch.index;
+        if (idx > 0) parts.push(remaining.slice(0, idx));
+        parts.push(<strong key={`${li}-${key++}`}>{boldMatch[1]}</strong>);
+        remaining = remaining.slice(idx + boldMatch[0].length);
+      } else {
+        parts.push(remaining);
+        break;
+      }
+    }
+    return <span key={li}>{parts}{li < lines.length - 1 && <br />}</span>;
+  });
+};
+
 // 视频资源（本地视频文件）
 // ============================================
 const VIDEOS = {
@@ -516,6 +541,8 @@ function App() {
   const [quizStep, setQuizStep] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState([]);
   const [showQuiz, setShowQuiz] = useState(() => !loadMemory().quiz_completed);
+  const [showCongrats, setShowCongrats] = useState(false);
+  const [congratsPersonality, setCongratsPersonality] = useState(null);
   const chatEndRef = useRef(null);
   const inspirationRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -625,8 +652,12 @@ function App() {
       setUserMemory(newMem);
       setShowQuiz(false);
 
-      // 用团团的新人格打招呼
+      // 显示恭喜弹窗
       const p = PERSONALITIES[personalityKey];
+      setCongratsPersonality(p);
+      setShowCongrats(true);
+
+      // 用团团的新人格打招呼
       setChatMessages([{
         role: "assistant",
         content: `${p.catchphrase}\n\n你好呀！我是「${p.name}」${p.emoji}，从现在开始我就是你的专属小团团啦～`
@@ -722,6 +753,16 @@ function App() {
             {/* 人格测试 */}
             {showQuiz && (
               <div className="section quiz-section">
+                {/* 答题提醒横幅 */}
+                {quizStep === 0 && (
+                  <div className="quiz-banner">
+                    <div className="quiz-banner-icon">🎁</div>
+                    <div className="quiz-banner-text">
+                      <strong>答题领取你的专属小团团</strong>
+                      <span>5道趣味题，找到全世界唯一的TA</span>
+                    </div>
+                  </div>
+                )}
                 <div className="quiz-progress">
                   <div className="quiz-progress-bar" style={{ width: `${((quizStep) / 5) * 100}%` }} />
                 </div>
@@ -737,6 +778,26 @@ function App() {
                   </div>
                 </div>
                 <p className="quiz-hint">🍙 5道题找到你的专属团团，全球仅3.7%的人和你一样</p>
+              </div>
+            )}
+
+            {/* 恭喜弹窗 */}
+            {showCongrats && congratsPersonality && (
+              <div className="congrats-overlay" onClick={() => setShowCongrats(false)}>
+                <div className="congrats-modal" onClick={e => e.stopPropagation()}>
+                  <div className="congrats-sparkles">✨🎉✨</div>
+                  <h2 className="congrats-title">恭喜获得专属小团团！</h2>
+                  <div className="congrats-personality">
+                    <span className="congrats-emoji">{congratsPersonality.emoji}</span>
+                    <span className="congrats-name">{congratsPersonality.name}</span>
+                  </div>
+                  <div className="congrats-rarity">🌟 超级稀有！全球仅 3.7% 的人拥有</div>
+                  <div className="congrats-catchphrase">「{congratsPersonality.catchphrase}」</div>
+                  <p className="congrats-desc">{congratsPersonality.style}</p>
+                  <button className="congrats-btn" onClick={() => setShowCongrats(false)}>
+                    🍙 开始和我的团团聊天
+                  </button>
+                </div>
               </div>
             )}
 
@@ -776,7 +837,7 @@ function App() {
                   {chatMessages.map((msg, i) => (
                     <div key={i} className={`chat-bubble ${msg.role === "user" ? "chat-user" : "chat-tuantuan"}`}>
                       {msg.role === "assistant" && <span className="bubble-avatar">🍙</span>}
-                      <div className="bubble-text">{msg.content}</div>
+                      <div className="bubble-text">{msg.role === "assistant" ? renderMarkdown(msg.content) : msg.content}</div>
                     </div>
                   ))}
                   {chatLoading && (
