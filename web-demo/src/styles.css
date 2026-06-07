@@ -530,6 +530,119 @@ body {
   background: #e6c000;
 }
 
+/* 人格测试 */
+.quiz-section {
+  padding: 12px 16px !important;
+  background: transparent !important;
+}
+
+.quiz-progress {
+  height: 4px;
+  background: #f0f0f0;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B35, #FFD700);
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.quiz-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px rgba(255,107,53,0.1);
+  border: 1px solid #FFE0B2;
+}
+
+.quiz-step {
+  font-size: 12px;
+  color: #FF6B35;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.quiz-question {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-option {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #f0f0f0;
+  border-radius: 12px;
+  background: #FAFAFA;
+  font-size: 14px;
+  color: #333;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.5;
+}
+
+.quiz-option:hover {
+  border-color: #FFB347;
+  background: #FFF8F0;
+  transform: translateX(4px);
+}
+
+.quiz-option:active {
+  transform: scale(0.98);
+}
+
+.quiz-hint {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  margin-top: 12px;
+}
+
+/* 人格徽章 */
+.personality-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  margin: 0 16px 8px;
+  background: linear-gradient(135deg, #FFF3E0, #FFECB3);
+  border-radius: 20px;
+  border: 1px solid #FFE0B2;
+}
+
+.personality-emoji {
+  font-size: 18px;
+}
+
+.personality-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FF6B35;
+}
+
+.personality-rare {
+  font-size: 10px;
+  color: #999;
+  background: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
 /* 和团团聊天 */
 .chat-section {
   padding-bottom: 8px !important;

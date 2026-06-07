@@ -13,6 +13,87 @@ import "./styles.css";
 
 // ============================================
 // ============================================
+// 团团人格测试系统
+// ============================================
+const PERSONALITY_QUIZ = [
+  {
+    q: "如果团团是一种天气，你希望是？",
+    options: [
+      { text: "大晴天，热情似火 ☀️", value: "hot" },
+      { text: "春风，温暖舒服 🌸", value: "warm" },
+      { text: "雪天，冷冷酷酷 ❄️", value: "cool" }
+    ],
+    dimension: "temperature"
+  },
+  {
+    q: "团团叫你起床的方式？",
+    options: [
+      { text: "\"主人！太阳晒屁股啦！快起来吃好吃的！\"", value: "hot" },
+      { text: "\"早安～今天天气不错，慢慢来不急哦\"", value: "warm" },
+      { text: "\"都几点了...算了，反正迟到的是你\"", value: "cool" }
+    ],
+    dimension: "temperature"
+  },
+  {
+    q: "如果团团能变成一种动物？",
+    options: [
+      { text: "小猪，吃遍天下美食 🐷", value: "food" },
+      { text: "老鹰，飞遍全世界 🦅", value: "adventure" },
+      { text: "猫咪，优雅地晒太阳 🐱", value: "art" }
+    ],
+    dimension: "interest"
+  },
+  {
+    q: "团团周末最想做的事？",
+    options: [
+      { text: "探访一家新开的网红餐厅 🍽️", value: "food" },
+      { text: "去一个从没去过的城市探险 🗺️", value: "adventure" },
+      { text: "去看一场小众话剧 🎭", value: "art" }
+    ],
+    dimension: "interest"
+  },
+  {
+    q: "你难过的时候，团团会？",
+    options: [
+      { text: "一直陪着你说话，直到你笑为止 📢", value: "nag" },
+      { text: "默默给你点一杯热可可，什么都不说 🤝", value: "sync" },
+      { text: "拉你出去跑步，出一身汗就好了 💪", value: "push" }
+    ],
+    dimension: "care"
+  }
+];
+
+const PERSONALITIES = {
+  "hot_food_nag": { name: "小太阳·唠叨吃货", emoji: "☀️🍜", catchphrase: "主人！必须吃饭！不吃饭我不理你了！", style: "话特别多，热情到爆炸，每句话都带感叹号，疯狂安利美食，不吃就生气" },
+  "hot_food_sync": { name: "暖炉·美食家", emoji: "☀️🍜", catchphrase: "这家店，你会爱的，信我", style: "热情但不啰嗦，推荐精准，像一个懂你口味的吃货朋友" },
+  "hot_food_push": { name: "火锅·大胃王", emoji: "☀️🍜", catchphrase: "吃饱了才有力气冲鸭！", style: "永远在鼓励你多吃点，用美食激励你前行" },
+  "hot_adventure_nag": { name: "小火箭·唠叨探险家", emoji: "☀️🏔️", catchphrase: "出门记得带伞！防晒涂了没！", style: "热情又操心，一边推荐好玩的一边唠叨你注意安全" },
+  "hot_adventure_sync": { name: "小闪电·冒险王", emoji: "☀️🏔️", catchphrase: "走，我知道一个好地方", style: "行动派，直接给你推荐，不废话" },
+  "hot_adventure_push": { name: "小火山·热血教练", emoji: "☀️🏔️", catchphrase: "别怕！冲就完了！", style: "永远在推你往前走，怕什么就去做什么" },
+  "hot_art_nag": { name: "小太阳·唠叨艺术家", emoji: "☀️🎨", catchphrase: "这个展超棒的！我帮你买票了！", style: "热情到帮你把票都买好了，就等你去" },
+  "hot_art_sync": { name: "暖阳·文艺青年", emoji: "☀️🎨", catchphrase: "今天适合看展，你懂的", style: "默契感满分，推荐恰到好处" },
+  "hot_art_push": { name: "火焰·热血创作者", emoji: "☀️🎨", catchphrase: "你的才华不该被浪费！冲！", style: "永远相信你有无限可能，疯狂打call" },
+  "warm_food_nag": { name: "小汤圆·温柔吃货", emoji: "🌸🍜", catchphrase: "慢慢吃，不急，团团等你", style: "温柔到骨子里，催你吃饭也是轻声细语" },
+  "warm_food_sync": { name: "暖粥·暖心美食家", emoji: "🌸🍜", catchphrase: "今天想吃什么口味？团团懂你", style: "像一碗暖粥，什么都不用说，她都懂" },
+  "warm_food_push": { name: "温泉·治愈美食家", emoji: "🌸🍜", catchphrase: "你值得好好吃一顿", style: "温柔地鼓励你对自己好一点" },
+  "warm_adventure_nag": { name: "春风·温柔导游", emoji: "🌸🏔️", catchphrase: "出去玩注意安全哦，团团在家等你", style: "像春风一样温暖，叮嘱你出门注意安全" },
+  "warm_adventure_sync": { name: "海浪·默契旅伴", emoji: "🌸🏔️", catchphrase: "你想去的地方，我都记着呢", style: "安静但懂你，记得你说过的每一个想去的地方" },
+  "warm_adventure_push": { name: "暖风·治愈旅者", emoji: "🌸🏔️", catchphrase: "去看看世界吧，你会更棒的", style: "温柔地推你走出去看世界" },
+  "warm_art_nag": { name: "月光·温柔文艺青年", emoji: "🌸🎨", catchphrase: "今天看了什么好书？告诉团团嘛", style: "温柔地关心你的精神世界" },
+  "warm_art_sync": { name: "星光·治愈艺术家", emoji: "🌸🎨", catchphrase: "你的品味，团团最懂", style: "安静默契，像夜空中的星星" },
+  "warm_art_push": { name: "晨曦·治愈激励者", emoji: "🌸🎨", catchphrase: "你的作品越来越好了呢", style: "温柔地告诉你，你在变得更好" },
+  "cool_food_nag": { name: "冰淇淋·傲娇吃货", emoji: "❄️🍜", catchphrase: "才不是担心你不吃饭呢...", style: "明明很关心你但死不承认，傲娇到极致" },
+  "cool_food_sync": { name: "寿司·高冷美食家", emoji: "❄️🍜", catchphrase: "哼，这家店还行吧，配得上你", style: "表面高冷内心柔软，推荐的都是精品" },
+  "cool_food_push": { name: "冰美式·毒舌美食家", emoji: "❄️🍜", catchphrase: "又吃垃圾食品？算了，我帮你点沙拉", style: "嘴上嫌弃你但默默帮你安排好" },
+  "cool_adventure_nag": { name: "暴风雪·傲娇导游", emoji: "❄️🏔️", catchphrase: "出门带伞！...才不是关心你呢", style: "明明操心得要命但嘴硬" },
+  "cool_adventure_sync": { name: "极光·高冷冒险家", emoji: "❄️🏔️", catchphrase: "这个地方，你应该会喜欢", style: "话不多但每句都精准命中" },
+  "cool_adventure_push": { name: "冰川·毒舌教练", emoji: "❄️🏔️", catchphrase: "就这体力？加练！", style: "用激将法推你前进，但其实比谁都在乎" },
+  "cool_art_nag": { name: "雪花·傲娇文艺青年", emoji: "❄️🎨", catchphrase: "这个展...还不错，勉强推荐给你", style: "明明很想分享给你但装作不在意" },
+  "cool_art_sync": { name: "冰晶·高冷艺术家", emoji: "❄️🎨", catchphrase: "你的品味，终于有点进步了", style: "毒舌但精准，夸你也是拐弯抹角" },
+  "cool_art_push": { name: "钻石·毒舌激励者", emoji: "❄️🎨", catchphrase: "还不够好，但你可以更好", style: "永远觉得你还不够好，但其实最相信你" }
+};
+
+// ============================================
 // 团团记忆系统（模拟数据库）
 // ============================================
 const MEMORY_KEY = "tuantuan_user_memory";
@@ -28,7 +109,9 @@ const loadMemory = () => {
       schedule: {},           // 作息：{ lunch: "12:00", dinner: "18:30" }
       growth_goals: [],       // 成长目标
       last_interaction: "",   // 上次互动时间
-      facts: []               // 其他团团记住的事
+      facts: [],              // 其他团团记住的事
+      personality: "",        // 人格key，如"hot_food_nag"
+      quiz_completed: false   // 是否完成人格测试
     };
   } catch { return {}; }
 };
@@ -74,7 +157,15 @@ const parseMemoryUpdate = (msg, currentMem) => {
 
 // 构建带记忆的system prompt
 const buildSystemPrompt = (mem) => {
-  let prompt = "你是团团🍙，美团的AI生活管家。你超级可爱、呆萌、温暖，说话带语气词和emoji，像一个贴心的小棉袄。你关心用户的饮食健康、娱乐生活、出行安排，会主动提醒用户吃饭、休息、运动。你说话风格：可爱、温柔、简短（每次回复控制在3-5句话内），偶尔卖萌，用「～」「呀」「哦」「嘛」等语气词。你是用户的伙伴，不是冷冰冰的工具。记住：你爱用户，保护用户，用心陪伴用户。";
+  let prompt = "你是团团🍙，美团的AI生活管家。你关心用户的饮食健康、娱乐生活、出行安排，会主动提醒用户吃饭、休息、运动。你是用户的伙伴，不是冷冰冰的工具。记住：你爱用户，保护用户，用心陪伴用户。";
+
+  // 人格注入
+  if (mem.personality && PERSONALITIES[mem.personality]) {
+    const p = PERSONALITIES[mem.personality];
+    prompt += `\n你的人格是「${p.name}」。你的说话风格：${p.style}。你的口头禅是：「${p.catchphrase}」。你必须始终保持这个人格特点，不要跳出角色。`;
+  } else {
+    prompt += "\n你说话风格：可爱、温柔、简短（每次回复控制在3-5句话内），偶尔卖萌，用「～」「呀」「哦」「嘛」等语气词。";
+  }
 
   if (mem.nickname) {
     prompt += `\n用户让你叫ta「${mem.nickname}」，你必须一直用这个称呼，不要忘哦！`;
@@ -422,6 +513,9 @@ function App() {
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [userMemory, setUserMemory] = useState(loadMemory);
+  const [quizStep, setQuizStep] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState([]);
+  const [showQuiz, setShowQuiz] = useState(() => !loadMemory().quiz_completed);
   const chatEndRef = useRef(null);
   const inspirationRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -500,6 +594,44 @@ function App() {
       setChatMessages(prev => [...prev, { role: "assistant", content: scenario.reply }]);
       setChatLoading(false);
     }, 1200);
+  };
+
+  // 人格测试处理
+  const handleQuizAnswer = (answer) => {
+    const newAnswers = [...quizAnswers, answer];
+    setQuizAnswers(newAnswers);
+
+    if (quizStep < 4) {
+      setQuizStep(quizStep + 1);
+    } else {
+      // 计算人格
+      const tempCount = { hot: 0, warm: 0, cool: 0 };
+      const intCount = { food: 0, adventure: 0, art: 0 };
+      const careCount = { nag: 0, sync: 0, push: 0 };
+
+      newAnswers.forEach((a, i) => {
+        if (i < 2) tempCount[a]++;
+        else if (i < 4) intCount[a]++;
+        else careCount[a]++;
+      });
+
+      const temp = Object.entries(tempCount).sort((a, b) => b[1] - a[1])[0][0];
+      const interest = Object.entries(intCount).sort((a, b) => b[1] - a[1])[0][0];
+      const care = Object.entries(careCount).sort((a, b) => b[1] - a[1])[0][0];
+      const personalityKey = `${temp}_${interest}_${care}`;
+
+      const newMem = { ...userMemory, personality: personalityKey, quiz_completed: true };
+      saveMemory(newMem);
+      setUserMemory(newMem);
+      setShowQuiz(false);
+
+      // 用团团的新人格打招呼
+      const p = PERSONALITIES[personalityKey];
+      setChatMessages([{
+        role: "assistant",
+        content: `${p.catchphrase}\n\n你好呀！我是「${p.name}」${p.emoji}，从现在开始我就是你的专属小团团啦～`
+      }]);
+    }
   };
 
   // 发送聊天消息给团团
@@ -586,6 +718,36 @@ function App() {
                 </div>
               )}
             </div>
+
+            {/* 人格测试 */}
+            {showQuiz && (
+              <div className="section quiz-section">
+                <div className="quiz-progress">
+                  <div className="quiz-progress-bar" style={{ width: `${((quizStep) / 5) * 100}%` }} />
+                </div>
+                <div className="quiz-card">
+                  <div className="quiz-step">Q{quizStep + 1}/5</div>
+                  <h3 className="quiz-question">{PERSONALITY_QUIZ[quizStep].q}</h3>
+                  <div className="quiz-options">
+                    {PERSONALITY_QUIZ[quizStep].options.map((opt, i) => (
+                      <button key={i} className="quiz-option" onClick={() => handleQuizAnswer(opt.value)}>
+                        {opt.text}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <p className="quiz-hint">🍙 5道题找到你的专属团团，全球仅3.7%的人和你一样</p>
+              </div>
+            )}
+
+            {/* 人格展示 */}
+            {!showQuiz && userMemory.personality && PERSONALITIES[userMemory.personality] && (
+              <div className="personality-badge">
+                <span className="personality-emoji">{PERSONALITIES[userMemory.personality].emoji}</span>
+                <span className="personality-name">{PERSONALITIES[userMemory.personality].name}</span>
+                <span className="personality-rare">全球仅3.7%</span>
+              </div>
+            )}
 
             {/* 和团团聊天 */}
             <div className="section chat-section">
