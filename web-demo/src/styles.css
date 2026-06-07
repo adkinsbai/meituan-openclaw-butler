@@ -583,6 +583,46 @@ body {
   font-size: 12px;
 }
 
+/* 团团记忆标签 */
+.memory-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.memory-tags::-webkit-scrollbar {
+  display: none;
+}
+
+.memory-label {
+  font-size: 11px;
+  color: #999;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.memory-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+  color: #2E7D32;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  animation: memoryPop 0.3s ease;
+}
+
+@keyframes memoryPop {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
 .chat-container {
   background: #fff;
   border-radius: 16px;

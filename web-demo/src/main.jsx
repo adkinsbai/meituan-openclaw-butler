@@ -12,6 +12,89 @@ import {
 import "./styles.css";
 
 // ============================================
+// ============================================
+// 团团记忆系统（模拟数据库）
+// ============================================
+const MEMORY_KEY = "tuantuan_user_memory";
+
+const loadMemory = () => {
+  try {
+    const saved = localStorage.getItem(MEMORY_KEY);
+    return saved ? JSON.parse(saved) : {
+      nickname: "",           // 用户让团团叫的名字
+      taste: [],              // 口味偏好：["爱吃辣", "不吃香菜"]
+      diet_history: [],       // 最近饮食记录
+      interests: [],          // 兴趣爱好
+      schedule: {},           // 作息：{ lunch: "12:00", dinner: "18:30" }
+      growth_goals: [],       // 成长目标
+      last_interaction: "",   // 上次互动时间
+      facts: []               // 其他团团记住的事
+    };
+  } catch { return {}; }
+};
+
+const saveMemory = (mem) => {
+  try { localStorage.setItem(MEMORY_KEY, JSON.stringify(mem)); } catch {}
+};
+
+// 从用户消息中提取需要记忆的信息
+const parseMemoryUpdate = (msg, currentMem) => {
+  const mem = { ...currentMem };
+  let updated = false;
+
+  // 记住称呼
+  const nameMatch = msg.match(/(?:叫我|叫我叫|称呼我|叫|我叫|我是|以后叫我|以后就叫我|叫我就好)\s*[「「]?(.{1,6})[」」]?\s*(?:就好|吧|了|哦|就行了)?$/);
+  if (nameMatch) {
+    mem.nickname = nameMatch[1].replace(/[，。！？~～、]/g, "").trim();
+    updated = true;
+  }
+
+  // 记住口味
+  if (msg.match(/我(?:喜欢|爱吃|想吃|最爱吃)/)) {
+    const food = msg.match(/(?:喜欢|爱吃|想吃|最爱吃)(.{2,10})/);
+    if (food) { mem.taste = [...new Set([...(mem.taste||[]), food[1]])]; updated = true; }
+  }
+  if (msg.match(/我(?:不吃|不爱吃|讨厌|不想吃)/)) {
+    const food = msg.match(/(?:不吃|不爱吃|讨厌|不想吃)(.{2,10})/);
+    if (food) { mem.taste = [...new Set([...(mem.taste||[]), "不吃"+food[1]])]; updated = true; }
+  }
+
+  // 记住兴趣
+  if (msg.match(/我(?:喜欢|爱|想学|在学|最近在)/)) {
+    const interest = msg.match(/(?:喜欢|爱|想学|在学|最近在(?:学|玩|练))\s*(.{2,8})/);
+    if (interest) { mem.interests = [...new Set([...(mem.interests||[]), interest[1]])]; updated = true; }
+  }
+
+  if (updated) {
+    mem.last_interaction = new Date().toISOString();
+    saveMemory(mem);
+  }
+  return mem;
+};
+
+// 构建带记忆的system prompt
+const buildSystemPrompt = (mem) => {
+  let prompt = "你是团团🍙，美团的AI生活管家。你超级可爱、呆萌、温暖，说话带语气词和emoji，像一个贴心的小棉袄。你关心用户的饮食健康、娱乐生活、出行安排，会主动提醒用户吃饭、休息、运动。你说话风格：可爱、温柔、简短（每次回复控制在3-5句话内），偶尔卖萌，用「～」「呀」「哦」「嘛」等语气词。你是用户的伙伴，不是冷冰冰的工具。记住：你爱用户，保护用户，用心陪伴用户。";
+
+  if (mem.nickname) {
+    prompt += `\n用户让你叫ta「${mem.nickname}」，你必须一直用这个称呼，不要忘哦！`;
+  }
+  if (mem.taste?.length) {
+    prompt += `\n用户的口味偏好：${mem.taste.join("、")}。推荐食物时要考虑这些。`;
+  }
+  if (mem.interests?.length) {
+    prompt += `\n用户的兴趣爱好：${mem.interests.join("、")}。`;
+  }
+  if (mem.growth_goals?.length) {
+    prompt += `\n用户的成长目标：${mem.growth_goals.join("、")}。`;
+  }
+  if (mem.facts?.length) {
+    prompt += `\n团团记住的关于用户的事：${mem.facts.join("；")}。`;
+  }
+
+  return prompt;
+};
+
 // 视频资源（本地视频文件）
 // ============================================
 const VIDEOS = {
@@ -310,11 +393,16 @@ function App() {
   const [userProfile, setUserProfile] = useState("photographer"); // photographer, hackathon, fitness
   const [tuantuanClicks, setTuantuanClicks] = useState(0);
   const [showTuantuanTip, setShowTuantuanTip] = useState(false);
-  const [chatMessages, setChatMessages] = useState([
-    { role: "assistant", content: "主人好呀～我是团团🍙你的生活小管家！今天有什么我能帮你的嘛？不管是吃饭、出去玩、还是想聊聊心事，团团都在哦～" }
-  ]);
+  const [chatMessages, setChatMessages] = useState(() => {
+    const mem = loadMemory();
+    const greeting = mem.nickname
+      ? `${mem.nickname}好呀～团团想你啦🍙 今天有什么我能帮你的嘛？`
+      : "主人好呀～我是团团🍙你的生活小管家！今天有什么我能帮你的嘛？不管是吃饭、出去玩、还是想聊聊心事，团团都在哦～";
+    return [{ role: "assistant", content: greeting }];
+  });
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
+  const [userMemory, setUserMemory] = useState(loadMemory);
   const chatEndRef = useRef(null);
   const inspirationRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -403,6 +491,10 @@ function App() {
     setChatMessages(prev => [...prev, { role: "user", content: userMsg }]);
     setChatLoading(true);
 
+    // 解析用户消息中的记忆信息
+    const updatedMemory = parseMemoryUpdate(userMsg, userMemory);
+    setUserMemory(updatedMemory);
+
     try {
       const res = await fetch("https://token-plan-cn.xiaomimimo.com/v1/chat/completions", {
         method: "POST",
@@ -413,7 +505,7 @@ function App() {
         body: JSON.stringify({
           model: "mimo-v2.5-pro",
           messages: [
-            { role: "system", content: "你是团团🍙，美团的AI生活管家。你超级可爱、呆萌、温暖，说话带语气词和emoji，像一个贴心的小棉袄。你关心用户的饮食健康、娱乐生活、出行安排，会主动提醒用户吃饭、休息、运动。你说话风格：可爱、温柔、简短（每次回复控制在3-5句话内），偶尔卖萌，用「～」「呀」「哦」「嘛」等语气词。你是用户的伙伴，不是冷冰冰的工具。记住：你爱用户，保护用户，用心陪伴用户。" },
+            { role: "system", content: buildSystemPrompt(updatedMemory) },
             ...chatMessages.map(m => ({ role: m.role, content: m.content })),
             { role: "user", content: userMsg }
           ],
@@ -490,6 +582,14 @@ function App() {
                   </button>
                 ))}
               </div>
+              {(userMemory.nickname || userMemory.taste?.length > 0 || userMemory.interests?.length > 0) && (
+                <div className="memory-tags">
+                  <span className="memory-label">🧠 团团记得：</span>
+                  {userMemory.nickname && <span className="memory-tag">叫你{userMemory.nickname}</span>}
+                  {userMemory.taste?.map((t, i) => <span key={i} className="memory-tag">{t}</span>)}
+                  {userMemory.interests?.map((t, i) => <span key={i} className="memory-tag">❤️{t}</span>)}
+                </div>
+              )}
               <div className="chat-container">
                 <div className="chat-messages-area">
                   {chatMessages.map((msg, i) => (
