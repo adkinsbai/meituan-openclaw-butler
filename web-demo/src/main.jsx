@@ -15,12 +15,12 @@ import "./styles.css";
 // 视频资源（本地视频文件）
 // ============================================
 const VIDEOS = {
-  beach: "/videos/小溪.mp4",
-  city: "/videos/湖泊.mp4",
-  food: "/videos/餐厅.mp4",
-  nature: "/videos/自然风景森林.mp4",
-  friends: "/videos/湖泊.mp4",
-  movie: "/videos/自然风景森林.mp4"
+  beach: "./videos/小溪.mp4",
+  city: "./videos/湖泊.mp4",
+  food: "./videos/餐厅.mp4",
+  nature: "./videos/自然风景森林.mp4",
+  friends: "./videos/湖泊.mp4",
+  movie: "./videos/自然风景森林.mp4"
 };
 
 // ============================================
@@ -142,7 +142,7 @@ function TuanTuan({ userState = "idle", onInteract }) {
       {/* 小团团主体 */}
       <div className="tuantuan-body" onClick={handleInteract}>
         <video
-          src="/videos/tuantuan-new.mp4"
+          src="./videos/tuantuan-new.mp4"
           className="tuantuan-video"
           autoPlay
           loop
