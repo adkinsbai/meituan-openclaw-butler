@@ -1,11 +1,16 @@
 {
-  "name": "meituan-openclaw-butler",
-  "version": "0.1.0",
+  "name": "meituan-life-butler",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
     "dev": "npm --prefix web-demo run dev",
     "build": "npm --prefix web-demo run build",
     "mock": "node mock-life-tools/bin/life.js",
-    "test:mock": "node mock-life-tools/bin/life.js scene.detect --text \"我不知道接下来干嘛\" && node mock-life-tools/bin/life.js activity.discover --location \"朝阳大悦城\" --time \"16:40\" --weather rain --explore-level medium && node mock-life-tools/bin/life.js broker.propose-groups --request-id broker_req_001"
+    "test:mock": "node mock-life-tools/bin/life.js scene.detect --text \"我不知道接下来干嘛\" && node mock-life-tools/bin/life.js activity.discover --location \"朝阳大悦城\" --time \"16:40\" --weather rain --explore-level medium && node mock-life-tools/bin/life.js broker.propose-groups --request-id broker_req_001",
+    "test:trip": "node mock-life-tools/bin/life.js trip.parse --text \"周末想去杭州玩2天\" --destination \"杭州\" --duration \"2天\" --budget 2000 && node mock-life-tools/bin/life.js trip.generate --destination \"杭州\" --duration \"2天\" --budget 2000",
+    "test:inspiration": "node mock-life-tools/bin/life.js inspiration.get --location \"望京\" --weather \"小雨\" --time \"14:00\" --mood \"不知道干嘛\""
+  },
+  "devDependencies": {
+    "puppeteer-core": "^25.1.0"
   }
 }

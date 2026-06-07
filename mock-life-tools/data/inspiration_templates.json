@@ -1,0 +1,265 @@
+[
+  {
+    "scenario": "rainy_day",
+    "weather": "雨天",
+    "recommendations": {
+      "trending": [
+        {
+          "id": "rain_trend_001",
+          "name": "《消失的她》",
+          "type": "movie",
+          "venue": "万达影城",
+          "price": 45,
+          "reason": "本周票房TOP1，悬疑烧脑"
+        },
+        {
+          "id": "rain_trend_002",
+          "name": "《变形金刚7》",
+          "type": "movie",
+          "venue": "CGV影城",
+          "price": 55,
+          "reason": "视效震撼，适合大银幕"
+        }
+      ],
+      "indoor": [
+        {
+          "id": "rain_indoor_001",
+          "name": "桌游局",
+          "type": "board_game",
+          "venue": "岛上桌游望京店",
+          "price": 68,
+          "reason": "下雨天最适合室内社交"
+        },
+        {
+          "id": "rain_indoor_002",
+          "name": "密室逃脱",
+          "type": "escape_room",
+          "venue": "迷境密室",
+          "price": 128,
+          "reason": "烧脑刺激，适合朋友一起"
+        },
+        {
+          "id": "rain_indoor_003",
+          "name": "KTV",
+          "type": "ktv",
+          "venue": "星聚会KTV",
+          "price": 88,
+          "reason": "唱歌解压，下雨天标配"
+        }
+      ],
+      "new_discovery": [
+        {
+          "id": "rain_new_001",
+          "name": "手作香薰体验",
+          "type": "experience",
+          "venue": "朝阳大悦城5F",
+          "duration": "45分钟",
+          "price": 79,
+          "reason": "低风险新体验，还能带走作品"
+        },
+        {
+          "id": "rain_new_002",
+          "name": "陶艺体验",
+          "type": "experience",
+          "venue": "陶语手工坊",
+          "duration": "60分钟",
+          "price": 99,
+          "reason": "放松身心，适合情侣"
+        }
+      ]
+    }
+  },
+  {
+    "scenario": "sunny_weekend",
+    "weather": "晴天周末",
+    "recommendations": {
+      "trending": [
+        {
+          "id": "sunny_trend_001",
+          "name": "故宫博物院",
+          "type": "museum",
+          "venue": "故宫",
+          "price": 60,
+          "reason": "必去打卡地，提前预约"
+        },
+        {
+          "id": "sunny_trend_002",
+          "name": "环球影城",
+          "type": "amusement",
+          "venue": "北京环球影城",
+          "price": 528,
+          "reason": "周末热门，建议早去"
+        }
+      ],
+      "outdoor": [
+        {
+          "id": "sunny_outdoor_001",
+          "name": "骑行",
+          "type": "cycling",
+          "venue": "奥林匹克森林公园",
+          "price": 30,
+          "reason": "天气好，适合户外运动"
+        },
+        {
+          "id": "sunny_outdoor_002",
+          "name": "野餐",
+          "type": "picnic",
+          "venue": "朝阳公园",
+          "price": 50,
+          "reason": "带上食物，享受阳光"
+        }
+      ],
+      "new_discovery": [
+        {
+          "id": "sunny_new_001",
+          "name": "皮划艇",
+          "type": "water_sport",
+          "venue": "雁栖湖",
+          "duration": "2小时",
+          "price": 150,
+          "reason": "夏日清凉，适合朋友"
+        }
+      ]
+    }
+  },
+  {
+    "scenario": "after_work",
+    "weather": "下班后",
+    "recommendations": {
+      "trending": [
+        {
+          "id": "work_trend_001",
+          "name": "电影",
+          "type": "movie",
+          "venue": "万达影城",
+          "price": 45,
+          "reason": "下班放松，看场电影"
+        }
+      ],
+      "relax": [
+        {
+          "id": "work_relax_001",
+          "name": "按摩足疗",
+          "type": "massage",
+          "venue": "良子健身",
+          "price": 168,
+          "reason": "缓解一天的疲劳"
+        },
+        {
+          "id": "work_relax_002",
+          "name": "温泉",
+          "type": "hot_spring",
+          "venue": "九华山庄",
+          "price": 198,
+          "reason": "放松身心，适合冬天"
+        }
+      ],
+      "social": [
+        {
+          "id": "work_social_001",
+          "name": "小酌一杯",
+          "type": "bar",
+          "venue": "三里屯酒吧街",
+          "price": 120,
+          "reason": "和朋友聊聊天"
+        }
+      ]
+    }
+  },
+  {
+    "scenario": "bored_at_home",
+    "weather": "宅家无聊",
+    "recommendations": {
+      "trending": [
+        {
+          "id": "home_trend_001",
+          "name": "外卖美食",
+          "type": "food_delivery",
+          "venue": "美团外卖",
+          "price": 50,
+          "reason": "犒劳自己，点份好吃的"
+        }
+      ],
+      "go_out": [
+        {
+          "id": "home_go_001",
+          "name": "电影",
+          "type": "movie",
+          "venue": "最近影院",
+          "price": 45,
+          "reason": "出门看场电影，换换心情"
+        },
+        {
+          "id": "home_go_002",
+          "name": "逛街",
+          "type": "shopping",
+          "venue": "最近商场",
+          "price": 200,
+          "reason": "逛逛商场，买点东西"
+        }
+      ],
+      "new_discovery": [
+        {
+          "id": "home_new_001",
+          "name": "剧本杀",
+          "type": "script_murder",
+          "venue": "戏精剧本杀",
+          "price": 128,
+          "reason": "沉浸式体验，认识新朋友"
+        }
+      ]
+    }
+  },
+  {
+    "scenario": "date_night",
+    "weather": "约会之夜",
+    "recommendations": {
+      "trending": [
+        {
+          "id": "date_trend_001",
+          "name": "电影",
+          "type": "movie",
+          "venue": "影院",
+          "price": 90,
+          "reason": "经典约会项目"
+        }
+      ],
+      "romantic": [
+        {
+          "id": "date_romantic_001",
+          "name": "西餐",
+          "type": "restaurant",
+          "venue": "西堤厚牛排",
+          "price": 200,
+          "reason": "浪漫氛围，适合约会"
+        },
+        {
+          "id": "date_romantic_002",
+          "name": "甜品",
+          "type": "dessert",
+          "venue": "Lady M",
+          "price": 80,
+          "reason": "精致甜品，甜蜜时光"
+        }
+      ],
+      "fun": [
+        {
+          "id": "date_fun_001",
+          "name": "密室逃脱",
+          "type": "escape_room",
+          "venue": "迷境密室",
+          "price": 128,
+          "reason": "一起解谜，增进感情"
+        },
+        {
+          "id": "date_fun_002",
+          "name": "手作体验",
+          "type": "experience",
+          "venue": "陶语手工坊",
+          "price": 99,
+          "reason": "一起做点东西，留下纪念"
+        }
+      ]
+    }
+  }
+]

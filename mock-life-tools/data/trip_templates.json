@@ -1,0 +1,430 @@
+[
+  {
+    "template_id": "hangzhou_2d",
+    "destination": "杭州",
+    "duration": "2天",
+    "season": "全年",
+    "total_price": 1881,
+    "savings": 219,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "6月7日 周六",
+        "activities": [
+          {
+            "time": "09:00",
+            "type": "transport",
+            "name": "高铁出发",
+            "detail": "G1234 北京南→杭州东 二等座",
+            "price": 553,
+            "icon": "train"
+          },
+          {
+            "time": "11:30",
+            "type": "transport",
+            "name": "到达杭州",
+            "detail": "打车去酒店",
+            "price": 45,
+            "icon": "taxi"
+          },
+          {
+            "time": "12:00",
+            "type": "restaurant",
+            "name": "新白鹿餐厅（西湖银泰店）",
+            "detail": "评分4.7 | 人均¥68 | 预计等位15分钟",
+            "price": 68,
+            "icon": "restaurant"
+          },
+          {
+            "time": "14:00",
+            "type": "ticket",
+            "name": "西湖游船",
+            "detail": "西湖游船票",
+            "price": 55,
+            "icon": "boat"
+          },
+          {
+            "time": "17:00",
+            "type": "activity",
+            "name": "河坊街逛吃",
+            "detail": "推荐：定胜糕、葱包桧、龙井茶",
+            "price": 50,
+            "icon": "shopping"
+          },
+          {
+            "time": "19:00",
+            "type": "restaurant",
+            "name": "楼外楼（孤山路店）",
+            "detail": "评分4.5 | 人均¥128 | 必点：西湖醋鱼",
+            "price": 128,
+            "icon": "restaurant"
+          },
+          {
+            "time": "20:30",
+            "type": "hotel",
+            "name": "全季酒店（西湖店）",
+            "detail": "¥389/晚 | 含早 | 免费取消",
+            "price": 389,
+            "icon": "hotel"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "date": "6月8日 周日",
+        "activities": [
+          {
+            "time": "08:00",
+            "type": "restaurant",
+            "name": "酒店早餐",
+            "detail": "含在房费中",
+            "price": 0,
+            "icon": "restaurant"
+          },
+          {
+            "time": "09:00",
+            "type": "ticket",
+            "name": "灵隐寺",
+            "detail": "门票 | 建议游玩2-3小时",
+            "price": 75,
+            "icon": "temple"
+          },
+          {
+            "time": "12:00",
+            "type": "restaurant",
+            "name": "知味观（杨公堤店）",
+            "detail": "评分4.6 | 人均¥85 | 必点：小笼包",
+            "price": 85,
+            "icon": "restaurant"
+          },
+          {
+            "time": "14:00",
+            "type": "activity",
+            "name": "龙井村品茶",
+            "detail": "免费 | 建议游玩1-2小时",
+            "price": 0,
+            "icon": "tea"
+          },
+          {
+            "time": "16:00",
+            "type": "transport",
+            "name": "返程",
+            "detail": "高铁杭州东→北京南",
+            "price": 553,
+            "icon": "train"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "template_id": "shanghai_2d",
+    "destination": "上海",
+    "duration": "2天",
+    "season": "全年",
+    "total_price": 2150,
+    "savings": 280,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "6月7日 周六",
+        "activities": [
+          {
+            "time": "08:00",
+            "type": "transport",
+            "name": "高铁出发",
+            "detail": "G1 北京南→上海虹桥 二等座",
+            "price": 553,
+            "icon": "train"
+          },
+          {
+            "time": "12:00",
+            "type": "restaurant",
+            "name": "南翔馒头店（豫园店）",
+            "detail": "评分4.6 | 人均¥45 | 必点：小笼包",
+            "price": 45,
+            "icon": "restaurant"
+          },
+          {
+            "time": "14:00",
+            "type": "activity",
+            "name": "外滩观光",
+            "detail": "免费 | 建议游玩1-2小时",
+            "price": 0,
+            "icon": "sightseeing"
+          },
+          {
+            "time": "16:00",
+            "type": "ticket",
+            "name": "东方明珠塔",
+            "detail": "门票 | 建议游玩2小时",
+            "price": 199,
+            "icon": "tower"
+          },
+          {
+            "time": "19:00",
+            "type": "restaurant",
+            "name": "新荣记（南京西路店）",
+            "detail": "评分4.8 | 人均¥380 | 必点：黄鱼面",
+            "price": 380,
+            "icon": "restaurant"
+          },
+          {
+            "time": "21:00",
+            "type": "hotel",
+            "name": "全季酒店（外滩店）",
+            "detail": "¥450/晚 | 含早 | 免费取消",
+            "price": 450,
+            "icon": "hotel"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "date": "6月8日 周日",
+        "activities": [
+          {
+            "time": "08:00",
+            "type": "restaurant",
+            "name": "酒店早餐",
+            "detail": "含在房费中",
+            "price": 0,
+            "icon": "restaurant"
+          },
+          {
+            "time": "09:30",
+            "type": "ticket",
+            "name": "上海迪士尼乐园",
+            "detail": "门票 | 建议游玩6-8小时",
+            "price": 475,
+            "icon": "disney"
+          },
+          {
+            "time": "18:00",
+            "type": "restaurant",
+            "name": "迪士尼园区内餐厅",
+            "detail": "评分4.2 | 人均¥120",
+            "price": 120,
+            "icon": "restaurant"
+          },
+          {
+            "time": "20:00",
+            "type": "transport",
+            "name": "返程",
+            "detail": "高铁上海虹桥→北京南",
+            "price": 553,
+            "icon": "train"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "template_id": "beijing_1d",
+    "destination": "北京",
+    "duration": "1天",
+    "season": "全年",
+    "total_price": 580,
+    "savings": 95,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "周六",
+        "activities": [
+          {
+            "time": "08:00",
+            "type": "restaurant",
+            "name": "护国寺小吃（护国寺店）",
+            "detail": "评分4.5 | 人均¥25 | 必点：豆汁、焦圈",
+            "price": 25,
+            "icon": "restaurant"
+          },
+          {
+            "time": "09:30",
+            "type": "ticket",
+            "name": "故宫博物院",
+            "detail": "门票 | 建议游玩3-4小时",
+            "price": 60,
+            "icon": "palace"
+          },
+          {
+            "time": "13:00",
+            "type": "restaurant",
+            "name": "四季民福（故宫店）",
+            "detail": "评分4.7 | 人均¥150 | 必点：烤鸭",
+            "price": 150,
+            "icon": "restaurant"
+          },
+          {
+            "time": "15:00",
+            "type": "activity",
+            "name": "什刹海胡同游",
+            "detail": "三轮车胡同游 | 约1小时",
+            "price": 100,
+            "icon": "rickshaw"
+          },
+          {
+            "time": "17:00",
+            "type": "restaurant",
+            "name": "姚记炒肝（鼓楼店）",
+            "detail": "评分4.4 | 人均¥35 | 必点：炒肝、包子",
+            "price": 35,
+            "icon": "restaurant"
+          },
+          {
+            "time": "19:00",
+            "type": "ticket",
+            "name": "德云社（三里屯店）",
+            "detail": "相声演出 | 约2小时",
+            "price": 210,
+            "icon": "comedy"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "template_id": "date_night",
+    "destination": "同城约会",
+    "duration": "半天",
+    "season": "全年",
+    "total_price": 450,
+    "savings": 80,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "今晚",
+        "activities": [
+          {
+            "time": "18:00",
+            "type": "restaurant",
+            "name": "外婆家（就近门店）",
+            "detail": "评分4.5 | 人均¥75 | 适合约会",
+            "price": 150,
+            "icon": "restaurant"
+          },
+          {
+            "time": "19:30",
+            "type": "ticket",
+            "name": "电影",
+            "detail": "正在热映：《消失的她》",
+            "price": 90,
+            "icon": "movie"
+          },
+          {
+            "time": "21:30",
+            "type": "activity",
+            "name": "甜品/咖啡",
+            "detail": "星巴克/喜茶 | 聊天放松",
+            "price": 60,
+            "icon": "coffee"
+          },
+          {
+            "time": "22:30",
+            "type": "transport",
+            "name": "打车回家",
+            "detail": "滴滴快车",
+            "price": 50,
+            "icon": "taxi"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "template_id": "friends_gathering",
+    "destination": "朋友聚会",
+    "duration": "半天",
+    "season": "全年",
+    "total_price": 380,
+    "savings": 65,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "周六晚",
+        "activities": [
+          {
+            "time": "17:00",
+            "type": "activity",
+            "name": "桌游/密室",
+            "detail": "岛上桌游 | 3小时 | 4人起",
+            "price": 200,
+            "icon": "board_game"
+          },
+          {
+            "time": "20:00",
+            "type": "restaurant",
+            "name": "海底捞（就近门店）",
+            "detail": "评分4.8 | 人均¥120 | 适合聚餐",
+            "price": 480,
+            "icon": "restaurant"
+          },
+          {
+            "time": "22:00",
+            "type": "activity",
+            "name": "KTV",
+            "detail": "星聚会KTV | 2小时 | 4人起",
+            "price": 200,
+            "icon": "ktv"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "template_id": "family_weekend",
+    "destination": "亲子周末",
+    "duration": "1天",
+    "season": "全年",
+    "total_price": 650,
+    "savings": 110,
+    "itinerary": [
+      {
+        "day": 1,
+        "date": "周六",
+        "activities": [
+          {
+            "time": "09:00",
+            "type": "restaurant",
+            "name": "麦当劳/肯德基",
+            "detail": "早餐 | 孩子喜欢",
+            "price": 60,
+            "icon": "restaurant"
+          },
+          {
+            "time": "10:00",
+            "type": "ticket",
+            "name": "欢乐谷/迪士尼",
+            "detail": "主题乐园 | 建议游玩5-6小时",
+            "price": 350,
+            "icon": "amusement"
+          },
+          {
+            "time": "12:00",
+            "type": "restaurant",
+            "name": "园区内餐厅",
+            "detail": "评分4.0 | 人均¥80",
+            "price": 160,
+            "icon": "restaurant"
+          },
+          {
+            "time": "16:00",
+            "type": "activity",
+            "name": "儿童乐园/游乐场",
+            "detail": "室内游乐场 | 1-2小时",
+            "price": 80,
+            "icon": "playground"
+          },
+          {
+            "time": "18:00",
+            "type": "restaurant",
+            "name": "必胜客/西贝",
+            "detail": "晚餐 | 适合家庭",
+            "price": 200,
+            "icon": "restaurant"
+          }
+        ]
+      }
+    ]
+  }
+]

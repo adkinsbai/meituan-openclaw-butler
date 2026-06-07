@@ -1,7 +1,10 @@
 node_modules/
 dist/
 .vite/
-.DS_Store
 *.log
-web-demo/node_modules/
-web-demo/dist/
+.DS_Store
+Thumbs.db
+*.png
+*.jpg
+!web-demo/public/**
+snap*.mjs

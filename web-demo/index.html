@@ -2,11 +2,78 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>饭点之外</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#FFD100" />
+    <meta name="description" content="美团生活管家 - 告诉我你想干嘛，美团帮你安排好" />
+    <title>美团生活管家</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* 预加载动画 */
+      .app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #FFD100 0%, #E6BC00 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.5s;
+      }
+      
+      .app-loading.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+      
+      .loading-logo {
+        font-size: 48px;
+        margin-bottom: 16px;
+        animation: pulse 1.5s ease-in-out infinite;
+      }
+      
+      .loading-text {
+        font-family: 'Noto Sans SC', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: #1A1A1A;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+    </style>
   </head>
   <body>
+    <!-- 预加载动画 -->
+    <div id="app-loading" class="app-loading">
+      <div class="loading-logo">🤖</div>
+      <div class="loading-text">美团生活管家</div>
+    </div>
+    
     <div id="root"></div>
+    
     <script type="module" src="/src/main.jsx"></script>
+    
+    <script>
+      // 页面加载完成后隐藏预加载动画
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var loading = document.getElementById('app-loading');
+          if (loading) {
+            loading.classList.add('fade-out');
+            setTimeout(function() {
+              loading.style.display = 'none';
+            }, 500);
+          }
+        }, 500);
+      });
+    </script>
   </body>
 </html>

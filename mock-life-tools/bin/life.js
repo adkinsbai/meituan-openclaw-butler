@@ -40,6 +40,7 @@ function notFound(command) {
     error: "unknown_command",
     command,
     available: [
+      // 原有命令
       "scene.detect",
       "service.suggest",
       "activity.discover",
@@ -53,7 +54,15 @@ function notFound(command) {
       "group.plan",
       "group.match",
       "group.invite",
-      "group.reserve"
+      "group.reserve",
+      // 新增命令 - 行程规划
+      "trip.parse",
+      "trip.generate",
+      "trip.book",
+      "trip.status",
+      // 新增命令 - 灵感推荐
+      "inspiration.get",
+      "inspiration.feedback"
     ]
   });
   process.exitCode = 1;
@@ -63,6 +72,9 @@ const [command, ...rest] = process.argv.slice(2);
 const args = parseArgs(rest);
 
 switch (command) {
+  // ============================================
+  // 原有命令 - 场景感知
+  // ============================================
   case "scene.detect": {
     const text = args.text || "";
     const context = readJson("context.json");
@@ -121,6 +133,9 @@ switch (command) {
     break;
   }
 
+  // ============================================
+  // 原有命令 - 组局撮合
+  // ============================================
   case "broker.scan": {
     const venues = readJson("venues.json");
     output({
@@ -257,6 +272,169 @@ switch (command) {
     };
     writeJson("reservations.json", [reservation]);
     output(reservation);
+    break;
+  }
+
+  // ============================================
+  // 新增命令 - 行程规划
+  // ============================================
+  case "trip.parse": {
+    // 解析用户意图
+    const text = args.text || "周末想去杭州玩2天，预算2000";
+    const destination = args.destination || "杭州";
+    const duration = args.duration || "2天";
+    const budget = parseInt(args.budget) || 2000;
+    const people = parseInt(args.people) || 1;
+    const date = args.date || "本周末";
+    
+    output({
+      intent: {
+        type: "travel",
+        destination,
+        duration,
+        budget,
+        people,
+        date,
+        preferences: ["自然风光", "美食", "文化体验"]
+      },
+      confidence: 0.95,
+      suggestions: [
+        "是否需要包含酒店？",
+        "有特殊饮食偏好吗？",
+        "需要安排接送机吗？"
+      ]
+    });
+    break;
+  }
+
+  case "trip.generate": {
+    // 生成行程
+    const destination = args.destination || "杭州";
+    const duration = args.duration || "2天";
+    const budget = parseInt(args.budget) || 2000;
+    const people = parseInt(args.people) || 1;
+    
+    const templates = readJson("trip_templates.json");
+    const template = templates.find(t => t.destination === destination) || templates[0];
+    
+    output({
+      trip_id: `trip_${Date.now()}`,
+      destination,
+      duration,
+      budget,
+      people,
+      itinerary: template.itinerary,
+      total_price: template.total_price,
+      savings: template.savings,
+      booking_deadline: "2026-06-06 23:59:59"
+    });
+    break;
+  }
+
+  case "trip.book": {
+    // 预订行程中的某个服务
+    const trip_id = args["trip-id"] || "trip_default";
+    const service_type = args["service-type"] || "restaurant";
+    const service_id = args["service-id"] || "restaurant_001";
+    
+    output({
+      booking_id: `booking_${Date.now()}`,
+      trip_id,
+      service_type,
+      service_id,
+      status: "pending",
+      redirect_url: `https://www.meituan.com/${service_type}/${service_id}`,
+      message: "正在为您跳转到美团预订页面..."
+    });
+    break;
+  }
+
+  case "trip.status": {
+    // 查询行程状态
+    const trip_id = args["trip-id"] || "trip_default";
+    
+    output({
+      trip_id,
+      status: "confirmed",
+      bookings: [
+        { type: "transport", status: "confirmed", name: "高铁 G1234" },
+        { type: "hotel", status: "confirmed", name: "全季酒店" },
+        { type: "restaurant", status: "pending", name: "新白鹿餐厅" }
+      ],
+      next_action: "确认餐厅预订"
+    });
+    break;
+  }
+
+  // ============================================
+  // 新增命令 - 灵感推荐
+  // ============================================
+  case "inspiration.get": {
+    // 获取灵感推荐
+    const location = args.location || "望京";
+    const weather = args.weather || "晴";
+    const time = args.time || "14:00";
+    const mood = args.mood || "不知道干嘛";
+    
+    const activities = readJson("activities.json");
+    const venues = readJson("venues.json");
+    
+    output({
+      location,
+      weather,
+      time,
+      mood,
+      recommendations: {
+        trending: [
+          {
+            id: "trend_001",
+            name: "《消失的她》",
+            type: "movie",
+            venue: "万达影城",
+            time: "16:20",
+            price: 45,
+            reason: "本周票房TOP1"
+          }
+        ],
+        indoor: [
+          {
+            id: "indoor_001",
+            name: "桌游局",
+            type: "board_game",
+            venue: "岛上桌游望京店",
+            price: 68,
+            reason: "下雨天适合室内活动"
+          }
+        ],
+        new_discovery: [
+          {
+            id: "new_001",
+            name: "手作香薰体验",
+            type: "experience",
+            venue: "朝阳大悦城5F",
+            duration: "45分钟",
+            price: 79,
+            reason: "低风险新体验"
+          }
+        ]
+      }
+    });
+    break;
+  }
+
+  case "inspiration.feedback": {
+    // 灵感反馈
+    const recommendation_id = args["recommendation-id"] || "trend_001";
+    const feedback = args.feedback || "interested";
+    
+    output({
+      status: "recorded",
+      recommendation_id,
+      feedback,
+      updated_preferences: {
+        explore_level: feedback === "boring" ? "low" : feedback === "exciting" ? "high" : "medium"
+      }
+    });
     break;
   }
 
