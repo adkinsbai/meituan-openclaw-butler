@@ -190,6 +190,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none;
 }
 
 .video-card-overlay {
@@ -435,6 +436,7 @@ body {
   object-fit: cover;
   border-radius: 16px;
   display: block;
+  pointer-events: none;
 }
 
 .tuantuan-mood {
@@ -1442,6 +1444,7 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none;
 }
 
 .trip-video-overlay {

@@ -226,11 +226,15 @@ function TuanTuan({ userState = "idle", onInteract }) {
       <div className="tuantuan-body" onClick={handleInteract}>
         <video
           src="./videos/tuantuan-new.mp4"
+          poster="./images/poster-tuantuan-new.jpg"
           className="tuantuan-video"
           autoPlay
           loop
           muted
           playsInline
+          preload="none"
+          disablePictureInPicture
+          onContextMenu={(e) => e.preventDefault()}
         />
         <div className="tuantuan-mood">{getMoodEmoji()}</div>
       </div>
@@ -264,19 +268,30 @@ function PersonalizedCard({ icon, title, desc, action, onClick }) {
 }
 
 // ============================================
-// 视频卡片组件
+// 视频卡片组件（纯动画背景，不可交互）
 // ============================================
 function VideoCard({ video, poster, children, className = "", onClick }) {
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && videoRef.current) {
+          videoRef.current.play().catch(() => {});
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
+  // 禁用右键菜单
+  const preventMenu = (e) => e.preventDefault();
+
   return (
-    <div className={`video-card ${className}`} onClick={onClick}>
+    <div ref={containerRef} className={`video-card ${className}`} onClick={onClick}>
       <video
         ref={videoRef}
         src={video}
@@ -284,6 +299,10 @@ function VideoCard({ video, poster, children, className = "", onClick }) {
         loop
         muted
         playsInline
+        autoPlay
+        preload="none"
+        disablePictureInPicture
+        onContextMenu={preventMenu}
         className="video-card-bg"
       />
       <div className="video-card-overlay" />
@@ -696,10 +715,14 @@ function App() {
             <div className="trip-video-header">
               <video
                 src={VIDEOS.beach}
+                poster="./images/poster-小溪.jpg"
                 autoPlay
                 loop
                 muted
                 playsInline
+                preload="none"
+                disablePictureInPicture
+                onContextMenu={(e) => e.preventDefault()}
                 className="trip-video-bg"
               />
               <div className="trip-video-overlay" />
